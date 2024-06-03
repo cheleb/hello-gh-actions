@@ -1,0 +1,16 @@
+name: Label PR
+
+on:
+  pull_request:
+
+jobs:
+    label:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Label PR
+            uses: actions/github-script@v3
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                  const labels = ["needs-review"];
+                  core.info(github.pull_request.labels)
