@@ -5,9 +5,9 @@ on:
 jobs:
   ephemeral:
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
     steps:
       - name: Push ephemeral environment
-        if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
         run: |
          echo "Checking out code ${{ github.event.pull_request.number }}"
          VERSION="pr-${{ github.event.pull_request.number }}"
