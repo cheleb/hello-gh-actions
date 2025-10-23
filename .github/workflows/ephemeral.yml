@@ -22,7 +22,7 @@ jobs:
 
   ephemeral:
     name: Push Ephemeral Environment
-    uses: WorldOfScala/actions/workflows/publish-pr.yml@master
+    uses: WorldOfScala/actions/.github/workflows/publish-pr.yml@master
     with:
       group_id: "k"
       num_groups: "hello-gh-actions"
