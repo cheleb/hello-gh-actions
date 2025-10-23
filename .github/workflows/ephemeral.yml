@@ -25,12 +25,5 @@ jobs:
     uses: WorldOfScala/actions/.github/workflows/publish-pr.yml@master
 
   test:
-    runs-on: ubuntu-latest
     needs: compile
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup SBT
-        uses: WorldOfScala/actions/setup-scala@master
-      - name: Run Tests
-        uses: WorldOfScala/actions/.github/workflows/test.yml@master
+    uses: WorldOfScala/actions/.github/workflows/test.yml@master
