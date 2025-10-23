@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Push ephemeral environment
         run: |
-         echo "Checking out code ${{ github.event.pull_request.number }}"
-         VERSION="pr-${{ github.event.pull_request.number }}"
-         echo "Pushing ephemeral environment for version $VERSION"
+          echo "Checking out code ${{ github.event.pull_request.number }}"
+          echo " Unlabeling ${{ github.event.label }}"
+          VERSION="pr-${{ github.event.pull_request.number }}"
+          echo "Pushing ephemeral environment for version $VERSION"
