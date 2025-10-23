@@ -1,4 +1,8 @@
 name: Ephemeral Workflow
+
+permissions:
+  pull-requests: write
+
 on:
   pull_request:
     types: [labeled, unlabeled, opened, synchronize, reopened]
