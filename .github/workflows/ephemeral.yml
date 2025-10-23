@@ -21,27 +21,23 @@ jobs:
 
 
   ephemeral:
-    runs-on: ubuntu-latest
-    needs: compile
-    if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
-    steps:
-      - name: Push ephemeral environment
-        run: |
-          echo "Checking out code ${{ github.event.pull_request.number }}"
-          echo " Unlabeling ${{ github.event.label.name }}"
-          VERSION="pr-${{ github.event.pull_request.number }}"
-          echo "Pushing ephemeral environment for version $VERSION"
-      - name: Tag PR for ArgoCD
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          github_token: ${{ github.token }}
-          labels: "argocd/review"
-  cleanup:
-    runs-on: ubuntu-latest
-    if: github.event.action == 'unlabeled' && github.event.label.name == 'ephemeral'
-    steps:
-      - name: Remove ephemeral environment
-        run: |
-          echo "Removing ephemeral environment for PR #${{ github.event.pull_request.number }}"
-          VERSION="pr-${{ github.event.pull_request.number }}"
-          echo "Ephemeral environment $VERSION removed"
+    name: Push Ephemeral Environment
+    uses: WorldOfScala/actions/workflows/publish-pr.yml@master
+    with:
+      group_id: "k"
+      num_groups: "hello-gh-actions"
+    # runs-on: ubuntu-latest
+    # needs: compile
+    # if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
+    # steps:
+    #   - name: Push ephemeral environment
+    #     run: |
+    #       echo "Checking out code ${{ github.event.pull_request.number }}"
+    #       echo " Unlabeling ${{ github.event.label.name }}"
+    #       VERSION="pr-${{ github.event.pull_request.number }}"
+    #       echo "Pushing ephemeral environment for version $VERSION"
+    #   - name: Tag PR for ArgoCD
+    #     uses: actions-ecosystem/action-add-labels@v1
+    #     with:
+    #       github_token: ${{ github.token }}
+    #       labels: "argocd/review"
