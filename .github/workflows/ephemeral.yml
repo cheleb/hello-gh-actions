@@ -21,4 +21,5 @@ jobs:
 
   ephemeral:
     # name: Push Ephemeral Environment
+    needs: compile
     uses: WorldOfScala/actions/.github/workflows/publish-pr.yml@master
