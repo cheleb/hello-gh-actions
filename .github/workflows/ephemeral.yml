@@ -14,3 +14,12 @@ jobs:
           echo " Unlabeling ${{ github.event.label.name }}"
           VERSION="pr-${{ github.event.pull_request.number }}"
           echo "Pushing ephemeral environment for version $VERSION"
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.action == 'unlabeled' && github.event.label.name == 'ephemeral'
+    steps:
+      - name: Remove ephemeral environment
+        run: |
+          echo "Removing ephemeral environment for PR #${{ github.event.pull_request.number }}"
+          VERSION="pr-${{ github.event.pull_request.number }}"
+          echo "Ephemeral environment $VERSION removed"
