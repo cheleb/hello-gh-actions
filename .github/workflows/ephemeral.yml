@@ -13,9 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Compile Code
+      - name: Setup SBT
         #run: echo "Compiling code..."
-        uses: world-of-scala/actions/setup-scala
+        uses: WorldOfScala/actions/setup-scala@master
+      - name: Compile Code
+        uses: WorldOfScala/actions/compile@master
 
 
   ephemeral:
