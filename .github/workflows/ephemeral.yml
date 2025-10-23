@@ -11,6 +11,6 @@ jobs:
       - name: Push ephemeral environment
         run: |
           echo "Checking out code ${{ github.event.pull_request.number }}"
-          echo " Unlabeling ${{ github.event.label }}"
+          echo " Unlabeling ${{ github.event.label.name }}"
           VERSION="pr-${{ github.event.pull_request.number }}"
           echo "Pushing ephemeral environment for version $VERSION"
