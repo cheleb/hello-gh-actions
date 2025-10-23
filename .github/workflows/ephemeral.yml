@@ -15,9 +15,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Compile Code
         #run: echo "Compiling code..."
-        uses: ./.github/actions/setup-scala
-        with:
-          scala_version: '2.13.6'
+        uses: world-of-scala/actions/setup-scala
 
 
   ephemeral:
