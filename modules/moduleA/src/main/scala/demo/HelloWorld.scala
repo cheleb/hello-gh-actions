@@ -1,5 +1,5 @@
 package demo
 
 object HelloWorld extends App {
-  println("Hello, world 5!")
+  println("Hello, world 6!")
 }
