@@ -5,7 +5,7 @@ permissions:
 
 on:
   pull_request:
-    types: [labeled, unlabeled, opened, synchronize, reopened]
+    types: [labeled, unlabeled, opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
 jobs:
   compile:
@@ -29,5 +29,9 @@ jobs:
     needs: compile
     runs-on: ubuntu-latest
     steps:
-      - name: Run Tests
-        uses: WorldOfScala/actions/test@master
+      - name: Run Tests / draft PR
+        if: github.event.pull_request.draft 
+        uses: WorldOfScala/actions/test/draft@master
+      - name: Run Tests / draft PR
+        if: github.event.pull_request.draft == false 
+        uses: WorldOfScala/actions/test/ready@master
