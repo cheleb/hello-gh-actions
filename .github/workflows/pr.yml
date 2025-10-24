@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Publish Ephemeral Environment
         uses: WorldOfScala/actions/publish-pr@master
+        with:
+          label-on-success: argocd/preview
 
   test:
     needs: compile
