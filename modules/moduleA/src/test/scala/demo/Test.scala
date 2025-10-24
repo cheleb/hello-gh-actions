@@ -1,5 +1,5 @@
 package demo
 
 object Test {
-  println("This is a test!3")
+  println("This is a test 4!")
 }
