@@ -26,13 +26,16 @@ jobs:
           label-on-success: argocd/preview
 
   test:
-    name: Run Tests ${{ github.event.pull_request.state }}
+    name: Run Tests
+    environment: Coverage
     needs: compile
     runs-on: ubuntu-latest
     steps:
       - name: Run Tests / draft PR
         if: github.event.pull_request.draft 
-        uses: WorldOfScala/actions/test/draft@master
+        uses: WorldOfScala/actions/test@master
       - name: Run Tests / ready PR
         if: github.event.pull_request.draft == false 
-        uses: WorldOfScala/actions/test/ready@master
+        uses: WorldOfScala/actions/test/coverage@master
+
+        
