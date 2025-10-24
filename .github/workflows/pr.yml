@@ -26,6 +26,7 @@ jobs:
           label-on-success: argocd/preview
 
   test:
+    name: Run Tests ${{ github.event.pull_request.state }}
     needs: compile
     runs-on: ubuntu-latest
     steps:
