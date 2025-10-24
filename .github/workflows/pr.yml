@@ -15,7 +15,7 @@ jobs:
         uses: WorldOfScala/actions/compile@master
 
   ephemeral:
-    # name: Push Ephemeral Environment
+    name: Publish PR
     needs: compile
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
