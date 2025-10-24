@@ -17,7 +17,11 @@ jobs:
   ephemeral:
     # name: Push Ephemeral Environment
     needs: compile
-    uses: WorldOfScala/actions/.github/workflows/publish-pr.yml@master
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
+    steps:
+      - name: Publish Ephemeral Environment
+        uses: WorldOfScala/actions/publish-pr@master
 
   test:
     needs: compile
