@@ -37,5 +37,7 @@ jobs:
       - name: Run Tests / ready PR
         if: github.event.pull_request.draft == false 
         uses: WorldOfScala/actions/test/coverage@master
-
+        with:
+          sonar-upload: false
+          codecov-upload: false
         
