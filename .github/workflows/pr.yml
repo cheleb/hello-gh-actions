@@ -38,14 +38,20 @@ jobs:
 
   test:
     name: Run Tests
-    environment: Coverage
     needs: compile
+    strategy:
+      matrix:
+        scala: [2, 3]
+    environment: Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Run Tests / draft PR
         if: github.event.pull_request.draft 
         uses: WorldOfScala/actions/test@master
+        with:
+          scala-version: ${{ matrix.scala }}
       - name: Run Tests / ready PR
         if: github.event.pull_request.draft == false 
         uses: WorldOfScala/actions/test/coverage@master
-        
+        with:
+          scala-version: ${{ matrix.scala }}
