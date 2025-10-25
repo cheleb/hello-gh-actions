@@ -8,21 +8,32 @@ on:
     types: [labeled, unlabeled, opened, synchronize, reopened, ready_for_review, converted_to_draft]
   workflow_dispatch:
 jobs:
+  
   compile:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scala: [2, 3]
     steps:
       - name: Compile Code
         uses: WorldOfScala/actions/compile@master
+        with:
+          scala-version: ${{ matrix.scala }}
 
   ephemeral:
     name: Publish PR
-    needs: compile
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scala: [2, 3]
+
+    needs: compile
     if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
     steps:
       - name: Publish Ephemeral Environment
         uses: WorldOfScala/actions/publish-pr@master
         with:
+          scala-version: ${{ matrix.scala }}
           label-on-success: argocd/preview
 
   test:
