@@ -1,0 +1,57 @@
+name: PR Workflow
+
+permissions:
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [labeled, unlabeled, opened, synchronize, reopened, ready_for_review, converted_to_draft]
+  workflow_dispatch:
+jobs:
+  
+  compile:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scala: [2, 3]
+    steps:
+      - name: Compile Code
+        uses: /WorldOfScala/actions/compile@master
+        with:
+          scala-version: ${{ matrix.scala }}
+
+  ephemeral:
+    name: Publish PR
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scala: [2, 3]
+
+    needs: compile
+    if: contains(github.event.pull_request.labels.*.name, 'ephemeral')
+    steps:
+      - name: Publish Ephemeral Environment
+        uses: WorldOfScala/actions/publish-pr@master
+        with:
+          scala-version: ${{ matrix.scala }}
+          label-on-success: argocd/preview
+
+  test:
+    name: Run Tests
+    needs: compile
+    strategy:
+      matrix:
+        scala: [2, 3]
+    environment: Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Tests / draft PR
+        if: github.event.pull_request.draft 
+        uses: WorldOfScala/actions/test@master
+        with:
+          scala-version: ${{ matrix.scala }}
+      - name: Run Tests / ready PR
+        if: github.event.pull_request.draft == false 
+        uses: WorldOfScala/actions/test/coverage@master
+        with:
+          scala-version: ${{ matrix.scala }}
