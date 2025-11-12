@@ -16,7 +16,7 @@ jobs:
         scala: [2, 3]
     steps:
       - name: Compile Code
-        uses: WorldOfScala/actions/compile@test
+        uses: /WorldOfScala/actions/compile@master
         with:
           scala-version: ${{ matrix.scala }}
 
