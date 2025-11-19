@@ -10,9 +10,7 @@ on:
 jobs:
   
   run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Lint Code
-        uses: /WorldOfScala/.github/workflows/linter@master
-      - name: Coverage
-        uses: /WorldOfScala/.github/workflows/coverage@master
+    uses: /WorldOfScala/.github/workflows/linter@master
+
+  coverage:
+    uses: /WorldOfScala/.github/workflows/coverage@master
