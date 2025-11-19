@@ -12,7 +12,22 @@ on:
 jobs:
   
   run:
+    # If ready for review, run linter
+    if: github.event.pull_request.draft == false
     uses: WorldOfScala/actions/.github/workflows/linter.yml@test
 
   coverage:
+    # If ready for review, run coverage
+    if: github.event.pull_request.draft == false
     uses: WorldOfScala/actions/.github/workflows/coverage.yml@test
+
+  compile:
+    # If draft, run compile
+    if: github.event.pull_request.draft
+    uses: WorldOfScala/actions/.github/workflows/compile.yml@test
+
+  tests:
+    # If  draft, run tests
+    if: github.event.pull_request.draft
+    needs: compile
+    uses: WorldOfScala/actions/.github/workflows/tests.yml@test
