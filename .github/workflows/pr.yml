@@ -10,7 +10,7 @@ on:
 jobs:
   
   run:
-    uses: /WorldOfScala/.github/workflows/linter.yml@master
+    uses: /WorldOfScala/actions/.github/workflows/linter.yml@master
 
   coverage:
-    uses: /WorldOfScala/.github/workflows/coverage.yml@master
+    uses: /WorldOfScala/actions/.github/workflows/coverage.yml@master
