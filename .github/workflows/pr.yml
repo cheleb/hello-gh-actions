@@ -11,23 +11,29 @@ on:
   workflow_dispatch:
 jobs:
   
+  labels:
+    uses: WorldOfScala/actions/.github/workflows/labels.yml@test
+
   run:
+    needs: labels
     # If ready for review, run linter
     if: github.event.pull_request.draft == false
     uses: WorldOfScala/actions/.github/workflows/linter.yml@test
 
   coverage:
+    needs: labels
     # If ready for review, run coverage
     if: github.event.pull_request.draft == false
     uses: WorldOfScala/actions/.github/workflows/coverage.yml@test
 
   compile:
+    needs: labels
     # If draft, run compile
     if: github.event.pull_request.draft
     uses: WorldOfScala/actions/.github/workflows/compile.yml@test
 
   tests:
+    needs: compile
     # If  draft, run tests
     if: github.event.pull_request.draft
-    needs: compile
     uses: WorldOfScala/actions/.github/workflows/tests.yml@test
