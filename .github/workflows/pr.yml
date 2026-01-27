@@ -8,14 +8,9 @@ on:
     types: [opened, edited, ready_for_review, synchronize, converted_to_draft]
 
 jobs:
-  pr_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Run only on non-draft PRs
-        if: ${{ github.event.pull_request.draft == false }}
-        uses: ./.github/workflows/pr-ready.yml
-      - name: Run only on draft PRs
-        if: ${{ github.event.pull_request.draft }}
-        uses: ./.github/workflows/pr-draft.yml
+  pr_draft:
+    if: ${{ github.event.pull_request.draft }}
+    uses: ./.github/workflows/pr-draft.yml
+  pr_ready:
+    if: ${{ github.event.pull_request.draft == false }}
+    uses: ./.github/workflows/pr-ready.yml
