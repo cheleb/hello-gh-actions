@@ -6,16 +6,36 @@ permissions:
 on:
   pull_request:
     types: [opened, edited, ready_for_review, synchronize, converted_to_draft]
+    paths:
+      - "**.scala"
+      - "**.sbt"
+      - "project/**"
+      - ".github/workflows/pr-draft.yml"
+      - ".github/workflows/pr-ready.yml"
 
 jobs:
-  pr_job:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      is_ephemeral: ${{ contains(github.event.pull_request.labels.*.name, 'ephemeral')  }}
+      is_draft: ${{ github.event.pull_request.draft }}
+    steps:
+      - name: Init
+        run: echo Init
+
+  ephmeral:
+    name: Ephemeral deployment
+    needs: init
+    if: ${{ needs.init.outputs.is_ephemeral == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-      - name: Run only on non-draft PRs
-        if: ${{ github.event.pull_request.draft == false }}
-        uses: ./.github/workflows/pr-ready.yml
-      - name: Run only on draft PRs
-        if: ${{ github.event.pull_request.draft }}
-        uses: ./.github/workflows/pr-draft.yml
+      - name: Ephemeral PR detected
+        run: echo "Ephemeral PR - skipping all checks"
+
+  build:
+    name: PR
+    needs: init
+    if: ${{ needs.init.outputs.is_ephemeral != 'true' }}
+    uses: ./.github/workflows/pr-build.yml
+    with:
+      is_draft: ${{ needs.init.outputs.is_draft == 'true' }}

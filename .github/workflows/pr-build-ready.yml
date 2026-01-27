@@ -1,0 +1,22 @@
+name: Scala CI
+
+on:
+    workflow_call:
+
+jobs:
+    coverage:
+        name: Code Coverage
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - run: echo "This is a ready PR. Running ready-specific checks..."
+    lint:
+        name: Lint Checks
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - run: echo "This is a ready PR. Running lint checks..."
