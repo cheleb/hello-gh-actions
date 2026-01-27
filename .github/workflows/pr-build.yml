@@ -9,10 +9,10 @@ on:
 
 jobs:
     pr_draft:
-        name: PR Draft
+        name: Draft
         if: ${{  inputs.is_draft }}
         uses: ./.github/workflows/pr-build-draft.yml
     pr_ready:
-        name: PR Ready
+        name: Ready
         if: ${{ inputs.is_draft == false }}
         uses: ./.github/workflows/pr-build-ready.yml

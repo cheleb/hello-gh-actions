@@ -33,7 +33,7 @@ jobs:
         run: echo "Ephemeral PR - skipping all checks"
 
   build:
-    name: PR Build
+    name: PR
     needs: init
     if: ${{ needs.init.outputs.is_ephemeral != 'true' }}
     uses: ./.github/workflows/pr-build.yml
