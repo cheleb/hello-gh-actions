@@ -5,6 +5,7 @@ on:
 
 jobs:
     coverage:
+        name: Code Coverage
         runs-on: ubuntu-latest
 
         steps:
@@ -12,6 +13,7 @@ jobs:
 
             - run: echo "This is a ready PR. Running ready-specific checks..."
     lint:
+        name: Lint Checks
         runs-on: ubuntu-latest
 
         steps:
