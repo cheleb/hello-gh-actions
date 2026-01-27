@@ -1,7 +1,7 @@
 name: PR
 
 permissions:
-  pull-requests: read
+  pull-requests: write
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.3.0
       - name: Run only on non-draft PRs
-        if: ${{ github.pull_request.draft == false }}
+        if: ${{ github.event.pull_request.draft == false }}
         run: echo "This is not a draft PR"
       - name: Run only on non-draft PRs
-        if: ${{ github.pull_request.draft }}
+        if: ${{ github.event.pull_request.draft }}
         run: echo "This is a draft PR"
