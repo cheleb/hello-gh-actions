@@ -1,17 +1,20 @@
 name: PR
 
+permissions:
+  pull-requests: read
+
 on:
-    pull_request:
+  pull_request:
 
 jobs:
-    pr_job:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3.3.0
-            - name: Run only on non-draft PRs
-              if: ${{ github.pull_request.draft == false }}
-              run: echo "This is not a draft PR"
-            - name: Run only on non-draft PRs
-              if: ${{ github.pull_request.draft }}
-              run: echo "This is a draft PR"
+  pr_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.3.0
+      - name: Run only on non-draft PRs
+        if: ${{ github.pull_request.draft == false }}
+        run: echo "This is not a draft PR"
+      - name: Run only on non-draft PRs
+        if: ${{ github.pull_request.draft }}
+        run: echo "This is a draft PR"
