@@ -8,8 +8,16 @@ on:
     types: [opened, edited, ready_for_review, synchronize, converted_to_draft]
 
 jobs:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      is_draft: ${{ github.event.pull_request.draft }}
+    steps:
+      - name: Set draft status
+        run: echo "is_draft=${{ github.event.pull_request.draft }}" >> $GITHUB_OUTPUT
   pr_draft:
     name: PR Draft
+    needs: init
     if: ${{ github.event.pull_request.draft }}
     uses: ./.github/workflows/pr-draft.yml
   pr_ready:
