@@ -5,6 +5,7 @@ permissions:
 
 on:
   pull_request:
+    types: [opened, edited, ready_for_review, synchronize]
 
 jobs:
   pr_job:
