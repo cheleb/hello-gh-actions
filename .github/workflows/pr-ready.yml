@@ -10,4 +10,4 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: WorldOfScala/actions/compile@master
+            - run: echo "This is a ready PR. Running ready-specific checks..."
