@@ -36,4 +36,4 @@ jobs:
     if: ${{ needs.init.outputs.is_ephemeral != 'true' }}
     uses: ./.github/workflows/pr-build.yml
     with:
-      is_draft: ${{ needs.init.outputs.is_draft }}
+      is_draft: ${{ needs.init.outputs.is_draft == 'true' }}
