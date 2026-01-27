@@ -11,8 +11,8 @@ jobs:
     pr_draft:
         name: PR Draft
         if: ${{  inputs.is_draft }}
-        uses: ./.github/workflows/pr-draft.yml
+        uses: ./.github/workflows/pr-build-draft.yml
     pr_ready:
         name: PR Ready
         if: ${{ inputs.is_draft == false }}
-        uses: ./.github/workflows/pr-ready.yml
+        uses: ./.github/workflows/pr-build-ready.yml

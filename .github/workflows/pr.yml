@@ -24,6 +24,7 @@ jobs:
         run: echo Init
 
   ephmeral:
+    name: Ephemeral deployment
     needs: init
     if: ${{ needs.init.outputs.is_ephemeral == 'true' }}
     runs-on: ubuntu-latest
@@ -32,6 +33,7 @@ jobs:
         run: echo "Ephemeral PR - skipping all checks"
 
   build:
+    name: PR Build
     needs: init
     if: ${{ needs.init.outputs.is_ephemeral != 'true' }}
     uses: ./.github/workflows/pr-build.yml
