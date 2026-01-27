@@ -8,8 +8,6 @@ on:
                 type: boolean
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
     pr_draft:
         name: PR Draft
         if: ${{  inputs.is_draft }}
