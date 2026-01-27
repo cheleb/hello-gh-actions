@@ -12,7 +12,10 @@ jobs:
     if: ${{ github.event.pull_request.draft }}
     uses: ./.github/workflows/pr-draft.yml
   pr_ready:
+    name: PR Ready
     if: ${{ github.event.pull_request.draft == false }}
     uses: ./.github/workflows/pr-ready.yml
   lint:
+    name: Lint
+    if: ${{ github.event.pull_request.draft == false }}
     uses: ./.github/workflows/pr-ready.yml

@@ -4,10 +4,17 @@ on:
     workflow_call:
 
 jobs:
-    build:
+    coverage:
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v4
 
             - run: echo "This is a ready PR. Running ready-specific checks..."
+    lint:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - run: echo "This is a ready PR. Running lint checks..."
