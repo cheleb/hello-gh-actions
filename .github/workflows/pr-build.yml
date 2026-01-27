@@ -1,0 +1,20 @@
+name: Scala CI
+
+on:
+    workflow_call:
+        inputs:
+            is_draft:
+                required: true
+                type: boolean
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    pr_draft:
+        name: PR Draft
+        if: ${{  inputs.is_draft }}
+        uses: ./.github/workflows/pr-draft.yml
+    pr_ready:
+        name: PR Ready
+        if: ${{ inputs.is_draft == false }}
+        uses: ./.github/workflows/pr-ready.yml
